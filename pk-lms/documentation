@@ -1,0 +1,76 @@
+Create a TypeScript App
+
+Create a project directory:
+	mkdir learner-management-system
+	cd learner-management-system
+
+Initialize a new Node.js project:
+	npm init -y
+
+Install TypeScript and other dependencies:
+	npm install typescript ts-node @types/node express @types/express mongoose @types/mongoose
+
+Initialize TypeScript configuration:
+	npx tsc --init
+
+Configure TypeScript: Modify tsconfig.json to set "outDir": "./dist" to specify the output directory for 
+compiled JavaScript files.
+	Find the compilerOptions section in the tsconfig.json file.
+	Add or modify the outDir property to specify the directory where you want the compiled JavaScript files 
+	to be placed.
+	{
+		"compilerOptions": {
+			"target": "es6",                        /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+			"module": "commonjs",                   /* Specify what module code is generated. */
+			"rootDir": "./src",                     /* Specify the root directory of input files. Use to control the output directory structure with `outDir`. */
+			"outDir": "./dist",                     /* Specify an output folder for all emitted files. */
+			"strict": true,                         /* Enable all strict type-checking options. */
+			"esModuleInterop": true,                /* Emit additional JavaScript to ease support for importing CommonJS modules. */
+			"skipLibCheck": true,                   /* Skip type checking all .d.ts files. */
+			"forceConsistentCasingInFileNames": true/* Ensure that casing is correct in imports. */
+		},
+		"include": ["src/**/*"]
+	}
+
+Create Your App Structure:
+	mkdir src
+		cd to src folder
+		type NUL > index.ts (creates file)
+		mkdir models
+			type NUL > user.ts
+	mkdir dist
+
+	learner-management-system
+	├── dist                # Compiled JavaScript files will be placed here
+	├── node_modules        # Installed dependencies (created by npm)
+	├── src                 # Source TypeScript files
+	│   ├── index.ts        # Entry point of your application
+	│   └── models          # Folder for your Mongoose models
+	│       └── user.ts     # Example Mongoose model
+	├── package.json        # NPM package configuration
+	├── tsconfig.json       # TypeScript configuration
+	├── Dockerfile          # Docker configuration
+	└── docker-compose.yml  # Docker Compose configuration
+
+Create a basic Express server in src/index.ts
+
+Create a simple User model in src/models/user.ts
+
+Create a Dockerfile
+
+Create a docker-compose.yml file to manage multiple containers
+	make sure version is up to date.
+
+Build and run the Docker containers:
+	docker-compose up --build (in cmd cd to project directory)
+
+Stopping the Containers
+	To stop the running containers, go back to the terminal where docker-compose up is running and press 
+		Ctrl + C. 
+	To remove the containers, networks, and volumes created by Docker Compose, run:
+		docker-compose down
+
+
+
+   
+
