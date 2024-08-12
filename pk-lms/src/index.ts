@@ -34,7 +34,7 @@ app.post('/add-student', async (req, res) => {
     }
 
     try {
-        const student = new Student({ name });
+        const student = new Student({ name, surname, grade, compLevel });
         await student.save();
         res.send('Student saved successfully!');
     } catch (err) {
@@ -44,14 +44,14 @@ app.post('/add-student', async (req, res) => {
 
 // Handle form staff submission
 app.post('/add-staff', async (req, res) => {
-    const { name, surname, role, email, seclevel } = req.body;
+    const { name, surname, role, email, securityLevel } = req.body;
 
-    if (!name || !surname || !role || !email || !seclevel) {
+    if (!name || !surname || !role || !email || !securityLevel) {
         return res.status(400).send('Name, Surname, Role, email, and Security Level are required');
     }
 
     try {
-        const staff = new Staff({ name });
+        const staff = new Staff({ name, surname, role, email, securityLevel });
         await staff.save();
         res.send('Staff saved successfully!');
     } catch (err) {
@@ -68,7 +68,7 @@ app.post('/add-task', async (req, res) => {
     }
 
     try {
-        const task = new Task({ description });
+        const task = new Task({ description, title, staffId, dueDate });
         await task.save();
         res.send('Task saved successfully!');
     } catch (err) {
