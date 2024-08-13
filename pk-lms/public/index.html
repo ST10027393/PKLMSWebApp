@@ -7,100 +7,148 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <h1>Learner Management System</h1>
-    <button onclick="openModal('studentModal')">Add Student</button>
-    <button onclick="openModal('staffModal')">Add Staff</button>
-    <button onclick="openModal('taskModal')">Add Task</button>
-
-    <!-- Student Modal -->
-    <div id="studentModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('studentModal')">&times;</span>
-            <h2>Add Student</h2>
-            <form action="/add-student" method="post">
-                <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" name="name" required>
-
-                <label for="studentSurname">Student Surname:</label>
-                <input type="text" id="studentSurname" name="surname" required>
-
-                <label for="studentGrade">Student Grade:</label>
-                <input type="number" id="studentGrade" name="grade" required>
-
-                <label for="compLevel">Computer Level:</label>
-                <input type="number" id="compLevel" name="compLevel" required>
-
-                <button type="submit">Add Student</button>
-            </form>
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="logo">
+            <img src="public\media\logo.png" alt="Logo"> 
         </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="students.html">Students</a></li>
+                <li><a href="staff.html">Staff</a></li>
+                <li><a href="tasks.html">Tasks</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <!-- Staff Modal -->
-    <div id="staffModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('staffModal')">&times;</span>
-            <h2>Add Staff</h2>
-            <form action="/add-staff" method="post">
-                <label for="staffName">Staff Name:</label>
-                <input type="text" id="staffName" name="name" required>
+    <div class="content">
+        <h1>Learner Management System</h1>
+        <button onclick="openModal('studentModal')">Add Student</button>
+        <button onclick="openModal('staffModal')">Add Staff</button>
+        <button onclick="openModal('taskModal')">Add Task</button>
 
-                <label for="staffSurname">Staff Surname:</label>
-                <input type="text" id="staffSurame" name="surname" required>
+        <!-- Student Modal -->
+        <div id="studentModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('studentModal')">&times;</span>
+                <h2>Add Student</h2>
+                <form action="/add-student" method="post">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="name" required>
 
-                <label for="staffEmail">Staff Email:</label>
-                <input type="email" id="staffEmail" name="email" required>
+                    <label for="studentSurname">Student Surname:</label>
+                    <input type="text" id="studentSurname" name="surname" required>
 
-                <label for="role">Staff Role:</label>
-                <input type="text" id="staffRole" name="role" required>
+                    <label for="studentGrade">Student Grade:</label>
+                    <input type="number" id="studentGrade" name="grade" required>
 
-                <label for="secureLevel">Security Level:</label>
-                <select id="secureLevel" name="securityLevel" required>
-                    <!-- Example options, replace with dynamic data from backend -->
-                    <option value="">Select level</option>
-                    <option value="level1">1</option>
-                    <option value="level2">2</option>
-                    <!-- Add more options dynamically -->
-                </select>
+                    <label for="compLevel">Computer Level:</label>
+                    <input type="number" id="compLevel" name="compLevel" required>
 
-                <button type="submit">Add Staff</button>
-            </form>
+                    <button type="submit">Add Student</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Staff Modal -->
+        <div id="staffModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('staffModal')">&times;</span>
+                <h2>Add Staff</h2>
+                <form action="/add-staff" method="post">
+                    <label for="staffName">Staff Name:</label>
+                    <input type="text" id="staffName" name="name" required>
+
+                    <label for="staffSurname">Staff Surname:</label>
+                    <input type="text" id="staffSurame" name="surname" required>
+
+                    <label for="staffEmail">Staff Email:</label>
+                    <input type="email" id="staffEmail" name="email" required>
+
+                    <label for="role">Staff Role:</label>
+                    <input type="text" id="staffRole" name="role" required>
+
+                    <label for="secureLevel">Security Level:</label>
+                    <select id="secureLevel" name="securityLevel" required>
+                        <!-- Example options, replace with dynamic data from backend -->
+                        <option value="">Select level</option>
+                        <option value="level1">1</option>
+                        <option value="level2">2</option>
+                        <!-- Add more options dynamically -->
+                    </select>
+
+                    <button type="submit">Add Staff</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Task Modal -->
+        <div id="taskModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('taskModal')">&times;</span>
+                <h2>Add Task</h2>
+                <form action="/add-task" method="post">
+                    <label for="taskTitle">Task Title:</label>
+                    <input type="text" id="taskTitle" name="title" required>
+                    
+                    <label for="taskDescription">Task Description (max 100 chars):</label>
+                    <input type="text" id="taskDescription" name="description" maxlength="100" required>
+                    
+                    <label for="staffAssigned">Assign Staff:</label>
+                    <select id="staffAssigned" name="staffId" required>
+                        <!-- Options will be dynamically populated by JavaScript -->
+                        <option value="">Select Staff</option>
+                    </select>
+                    
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" required>
+                    
+                    <button type="submit">Add Task</button>
+                </form>
+        
+            </div>
         </div>
     </div>
-
-    <!-- Task Modal -->
-    <div id="taskModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('taskModal')">&times;</span>
-            <h2>Add Task</h2>
-            <form action="/add-task" method="post">
-                <label for="taskTitle">Task Title:</label>
-                <input type="text" id="taskTitle" name="title" required>
-                
-                <label for="taskDescription">Task Description (max 100 chars):</label>
-                <input type="text" id="taskDescription" name="description" maxlength="100" required>
-                
-                <label for="staffAssigned">Assign Staff:</label>
-                <select id="staffAssigned" name="staffId" required>
-                    <!-- Example options, replace with dynamic data from backend -->
-                    <option value="">Select Staff</option>
-                    <option value="staff1">John Doe</option>
-                    <option value="staff2">Jane Smith</option>
-                    <!-- Add more options dynamically -->
-                </select>
-                
-                <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate" name="dueDate" required>
-                
-                <button type="submit">Add Task</button>
-            </form>
     
-        </div>
-    </div>
 
     <script>
+
+        async function populateStaffDropdown() {
+            try {
+                const response = await fetch('/staff-list');
+                const staffList = await response.json();
+                const staffDropdown = document.getElementById('staffAssigned');
+
+                // Clear existing options
+                staffDropdown.innerHTML = '<option value="">Select Staff</option>';
+
+                // Populate dropdown with staff data
+                staffList.forEach(staff => {
+                    const option = document.createElement('option');
+                    option.value = staff._id; // Use staff ID as the value
+                    option.textContent = `${staff.name} ${staff.surname}`;
+                    staffDropdown.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Failed to populate staff dropdown', err);
+            }
+        }
+
+
+        // Call this function when opening the task modal
+        function openModal(modalId) {
+            if (modalId === 'taskModal') {
+                populateStaffDropdown();
+            }
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        /*
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
         }
+        */
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';

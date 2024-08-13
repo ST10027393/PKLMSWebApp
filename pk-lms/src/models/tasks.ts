@@ -12,7 +12,7 @@ interface ITask extends Document {
 const TaskSchema: Schema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true, maxlength: 100 },
-    staffId: { type: String, required: true }, // Reference to the Staff model
+    staffId: { type: Schema.Types.ObjectId, ref: 'Staff', required: true }, // Reference to the Staff model
     dueDate: { type: Date, required: true }
 });
 

@@ -79,3 +79,34 @@ app.post('/add-task', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+// Endpoint to get staff members for the dropdown
+app.get('/staff-list', async (req, res) => {
+    try {
+        const staffList = await Staff.find({}, 'name surname'); // Fetch only name and surname fields
+        res.json(staffList);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve staff list');
+    }
+});
+
+// Endpoint to get student data
+app.get('/student-list', async (req, res) => {
+    try {
+        const students = await Student.find({});
+        res.json(students);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve student data');
+    }
+});
+
+//Endpoint for downloading student data as excel file
+app.get('/studentDisplay', async (req, res) => {
+    try {
+        const students = await Student.find({});
+        res.json(students);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve students');
+    }
+});
+

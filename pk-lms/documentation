@@ -70,7 +70,11 @@ Stopping the Containers
 	To remove the containers, networks, and volumes created by Docker Compose, run:
 		docker-compose down
 
-
+View database: 
+	In terminal in folder
+	docker exec -it pk-lms-mongo-1 mongo
+	use lms
+	
 
    
 
