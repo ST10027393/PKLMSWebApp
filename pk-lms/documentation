@@ -41,16 +41,27 @@ Create Your App Structure:
 	mkdir dist
 
 	learner-management-system
-	├── dist                # Compiled JavaScript files will be placed here
-	├── node_modules        # Installed dependencies (created by npm)
-	├── src                 # Source TypeScript files
-	│   ├── index.ts        # Entry point of your application
-	│   └── models          # Folder for your Mongoose models
-	│       └── user.ts     # Example Mongoose model
-	├── package.json        # NPM package configuration
-	├── tsconfig.json       # TypeScript configuration
-	├── Dockerfile          # Docker configuration
-	└── docker-compose.yml  # Docker Compose configuration
+	├── dist                   # Compiled JavaScript files will be placed here
+	├── node_modules           # Installed dependencies (created by npm)
+	├── src                    # Source TypeScript files
+	│   ├── index.ts           # Entry point of your application
+	│   └── models             # Folder for your Mongoose models
+	│       └── user.ts        # Example Mongoose model
+	│       └── tasks.ts       #
+	│       └── students.ts    #
+	│       └── staff.ts       #
+	├── public                 #
+	│   ├── media              # Entry point of your application
+	│   └── index.css          #
+	│   └── index.html         #
+	│   └── staff.html         #
+	│   └── studentDisplay.ts  #
+	│   └── students.html      #
+	│   └── tasks.html         #
+	├── package.json           # NPM package configuration
+	├── tsconfig.json          # TypeScript configuration
+	├── Dockerfile             # Docker configuration
+	└── docker-compose.yml     # Docker Compose configuration
 
 Create a basic Express server in src/index.ts
 
@@ -74,6 +85,8 @@ View database:
 	In terminal in folder
 	docker exec -it pk-lms-mongo-1 mongo
 	use lms
+	show collections
+	db.collectionName.find().pretty()
 	
 
    

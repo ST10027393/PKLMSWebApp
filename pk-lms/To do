@@ -1,3 +1,19 @@
 Fix dropdown output
 
-create output for staff student and task info.
+Phase 1:
+    Create output for staff student and task info.
+    Add login functionality
+    Add delete/edit functionality for data in database
+    Fix information save feature do not redirect but to just refresh page
+
+Phase 2:
+    Improve design
+    Add security level features
+    Add attendance tab
+
+Phase 3:
+    Add cirriculum access tab
+
+Phase 4:
+    Give students access to cirriculum through lms
+    Give students accounts

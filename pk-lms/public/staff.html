@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Page</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
     <!-- Taskbar -->
     <div class="taskbar">
         <div class="logo">
-            <img src="media\logo.png" alt="Logo"> <!-- Replace with your logo's image path -->
+            <img src="media\logo.png" alt="Logo"> 
         </div>
         <nav class="navigation">
             <ul>
@@ -23,8 +24,25 @@
     </div>
 
     <div class="content">
-
+        <h2>Staff Information</h2>
+        <button id="exportTableToExcel">Export to Excel</button>
+        <table id="staffTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Security Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JavaScript -->
+            </tbody>
+        </table>
     </div>
+
+    <script src="staffDisplay.js"></script>
     
 </body>
 </html>

@@ -100,6 +100,26 @@ app.get('/student-list', async (req, res) => {
     }
 });
 
+// Endpoint to get staff data
+app.get('/staff-data', async (req, res) => {
+    try {
+        const staffData = await Staff.find({});
+        res.json(staffData);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve staff list');
+    }
+});
+
+// Endpoint to get student data
+app.get('/task-list', async (req, res) => {
+    try {
+        const tasks = await Student.find({});
+        res.json(tasks);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve student data');
+    }
+});
+
 //Endpoint for downloading student data as excel file
 app.get('/studentDisplay', async (req, res) => {
     try {
@@ -107,6 +127,26 @@ app.get('/studentDisplay', async (req, res) => {
         res.json(students);
     } catch (err) {
         res.status(500).send('Failed to retrieve students');
+    }
+});
+
+//Endpoint for downloading staff data as excel file
+app.get('/staffDisplay', async (req, res) => {
+    try {
+        const staffs = await Staff.find({});
+        res.json(staffs);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve staff');
+    }
+});
+
+//Endpoint for downloading tasks data as excel file
+app.get('/taskDisplay', async (req, res) => {
+    try {
+        const tasks = await Task.find({});
+        res.json(tasks);
+    } catch (err) {
+        res.status(500).send('Failed to retrieve tasks');
     }
 });
 
