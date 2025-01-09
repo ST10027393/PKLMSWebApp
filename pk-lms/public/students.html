@@ -26,6 +26,11 @@
     <div class="content">
         <h2>Student Information</h2>
         <button id="exportTableToExcel">Export to Excel</button>
+        <form id="searchForm">
+            <input type="text" id="searchQuery" placeholder="Search by name or surname" required>
+            <button type="submit">Search</button>
+        </form>
+        <div id="searchResults"></div>        
         <table id="studentTable">
             <thead>
                 <tr>
@@ -37,11 +42,138 @@
             </thead>
             <tbody>
                 <!-- Rows will be populated by JavaScript -->
+
+                <!--Edit Student Modal -->
+                <div id="editStudentModal" class="modal">
+                    <div class="modal-content">
+                      <span class="close" onclick="closeEditModal()">&times;</span>
+                      <h2>Edit Student</h2>
+                      <form id="editStudentForm">
+                        <input type="hidden" id="editStudentId" />
+                        <label for="editName">Name:</label>
+                        <input type="text" id="editName" required />
+                  
+                        <label for="editSurname">Surname:</label>
+                        <input type="text" id="editSurname" required />
+                  
+                        <label for="editGrade">Grade:</label>
+                        <input type="text" id="editGrade" required />
+                  
+                        <label for="editCompLevel">Computer Level:</label>
+                        <input type="text" id="editCompLevel" required />
+                  
+                        <button type="submit">Save Changes</button>
+                      </form>
+                    </div>
+                </div>
             </tbody>
         </table>
     </div>
 
     <script src="studentDisplay.js"></script>
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const query = document.getElementById('searchQuery').value;
+
+            try {
+                const response = await fetch(`/search-student?query=${query}`);
+                const students = await response.json();
+
+                const resultsContainer = document.getElementById('searchResults');
+                resultsContainer.innerHTML = '';
+
+                students.forEach(student => {
+                    const studentDiv = document.createElement('div');
+                    studentDiv.innerHTML = `
+                        <p>${student.name} ${student.surname} - Grade: ${student.grade}</p>
+                        <button onclick="editStudent('${student._id}')">Edit</button>
+                        <button onclick="deleteStudent('${student._id}')">Delete</button>
+                    `;
+                    resultsContainer.appendChild(studentDiv);
+                });
+            } catch (err) {
+                console.error('Failed to search for students', err);
+            }
+        });
+
+        async function editStudent(studentId) {
+            try {
+                const response = await fetch(`/students/${studentId}`);
+                const student = await response.json();
+
+                // Populate the modal fields with the student's data
+                document.getElementById('editStudentId').value = student._id;
+                document.getElementById('editName').value = student.name;
+                document.getElementById('editSurname').value = student.surname;
+                document.getElementById('editGrade').value = student.grade;
+                document.getElementById('editCompLevel').value = student.compLevel;
+
+                // Show the modal
+                document.getElementById('editStudentModal').style.display = 'block';
+            } catch (err) {
+                console.error('Failed to fetch student data', err);
+                alert('An error occurred while fetching student data');
+            }
+        }
+
+        //form sub
+        document.getElementById('editStudentForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const studentId = document.getElementById('editStudentId').value;
+            const updatedStudent = {
+                name: document.getElementById('editName').value,
+                surname: document.getElementById('editSurname').value,
+                grade: document.getElementById('editGrade').value,
+                compLevel: document.getElementById('editCompLevel').value,
+            };
+
+            try {
+                const response = await fetch(`/edit-student/${studentId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedStudent),
+                });
+
+                if (response.ok) {
+                    alert('Student updated successfully');
+                    closeEditModal();
+                    location.reload(); // Refresh the page
+                } else {
+                    alert('Failed to update student');
+                }
+            } catch (err) {
+                console.error('Failed to update student', err);
+                alert('An error occurred while updating the student');
+            }
+        });
+
+        //close ,modal
+        function closeEditModal() {
+            document.getElementById('editStudentModal').style.display = 'none';
+        }
+
+
+
+        async function deleteStudent(studentId) {
+            if (confirm('Are you sure you want to delete this student?')) {
+                try {
+                    const response = await fetch(`/delete-student/${studentId}`, { method: 'DELETE' });
+
+                    if (response.ok) {
+                        alert('Student deleted successfully');
+                        location.reload(); // Refresh the page
+                    } else {
+                        alert('Failed to delete student');
+                    }
+                } catch (err) {
+                    console.error('Failed to delete student', err);
+                }
+            }
+        }
+
+    </script>
 
 </body>
 </html>

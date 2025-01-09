@@ -5,6 +5,9 @@ Phase 1:
     Add login functionality
     Add delete/edit functionality for data in database
     Fix information save feature do not redirect but to just refresh page
+    Add line that indiactes student cannot be found
+    fix task output
+    Add edit and delete buttons for tasks also
 
 Phase 2:
     Improve design

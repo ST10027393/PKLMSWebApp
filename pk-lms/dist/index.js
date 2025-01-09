@@ -151,3 +151,56 @@ app.get('/taskDisplay', (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).send('Failed to retrieve tasks');
     }
 }));
+// Search for students by name or surname
+app.get('/search-student', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { query } = req.query; // Get search query from request
+    if (!query) {
+        return res.status(400).send('Search query is required');
+    }
+    try {
+        // Find students whose name or surname matches the query (case-insensitive)
+        const students = yield students_1.default.find({
+            $or: [
+                { name: { $regex: query, $options: 'i' } },
+                { surname: { $regex: query, $options: 'i' } }
+            ]
+        });
+        if (students.length === 0) {
+            return res.status(404).send('No students found');
+        }
+        res.json(students);
+    }
+    catch (err) {
+        res.status(500).send('Failed to search for students');
+    }
+}));
+// Edit a student's information by ID
+app.put('/edit-student/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { name, surname, grade, compLevel } = req.body;
+    try {
+        const updatedStudent = yield students_1.default.findByIdAndUpdate(id, { name, surname, grade, compLevel }, { new: true, runValidators: true } // Return the updated document
+        );
+        if (!updatedStudent) {
+            return res.status(404).send('Student not found');
+        }
+        res.send('Student updated successfully');
+    }
+    catch (err) {
+        res.status(500).send('Failed to update student');
+    }
+}));
+// Delete a student by ID
+app.delete('/delete-student/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const deletedStudent = yield students_1.default.findByIdAndDelete(id);
+        if (!deletedStudent) {
+            return res.status(404).send('Student not found');
+        }
+        res.send('Student deleted successfully');
+    }
+    catch (err) {
+        res.status(500).send('Failed to delete student');
+    }
+}));
